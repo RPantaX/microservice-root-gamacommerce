@@ -201,6 +201,19 @@ SOLICITAR A JEFFERSON PANTA LOS ENVIROMENT VARIABLES NECESARIOS
 4. Haz clic en **Apply** → **OK**
 
 ![Configuración de Variables de Entorno](docs/images/intellij-env-vars.png)
+![Configuración de Variables de Entorno](docs/images/intellij-env-vars_1.png)
+![Configuración de Variables de Entorno](docs/images/intellij-env-vars_2.png)
+---
+### Configurar Plugins en Intellij
+Debes tener estos plugins instalados en tu IDE de Intellij para que puedas ejecutar los servicios y seguir los pasos de esta guia.
+1. Sigue estos pasos para ir a instalacion de plugins
+![Configuración de Plugins](docs/images/plugins-intellij-1.png)
+2. Asegurate de tener instalados los siguientes plugins:
+   - Docker
+   
+![Configuración de Plugins](docs/images/plugins-intellij-docker.png)
+   - Lombok
+![Configuración de Plugins](docs/images/plugins-intellij-lombok.png)
 
 ---
 
@@ -232,8 +245,8 @@ Abre **Docker Desktop** y confirma que los siguientes contenedores estén en est
 - ✅ elasticsearch
 - ✅ kibana
 
+![Docker Desktop Containers](docs/images/docker-intellij-running.png)
 ![Docker Desktop Containers](docs/images/docker-desktop-running.png)
-
 ---
 
 ### Paso 2: Ejecutar los Microservicios
@@ -288,6 +301,9 @@ Deberías ver todos los microservicios registrados con estado **UP**.
 2. Haz clic en **Import**
 3. Selecciona el archivo de colección del proyecto 📄GamaCommerce.postman_collection.json
 4. La colección cargará todos los endpoints preconfigurados
+
+![Postman image](docs/images/postman-image.png)
+
 
 ---
 
