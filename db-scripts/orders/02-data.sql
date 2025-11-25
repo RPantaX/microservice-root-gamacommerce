@@ -83,25 +83,7 @@ INSERT INTO shopping_method (
     CURRENT_TIMESTAMP
 ),
 
--- Solo para servicios (reservas)
-(
-    'Servicio en Salón',
-    'Servicio prestado directamente en nuestras instalaciones. Solo para reservas de servicios.',
-    0.00,
-    'Fecha de cita',
-    TRUE,
-    'admin',
-    CURRENT_TIMESTAMP
-),
-(
-    'Servicio a Domicilio',
-    'Servicio de belleza prestado en la comodidad de tu hogar. Disponible para servicios seleccionados.',
-    50.00,
-    'Fecha programada',
-    TRUE,
-    'admin',
-    CURRENT_TIMESTAMP
-),
+
 
 -- Métodos promocionales o especiales
 (
@@ -118,17 +100,6 @@ INSERT INTO shopping_method (
     'Programa la fecha y hora exacta de entrega. Perfecto para regalos y ocasiones especiales.',
     20.00,
     'Fecha programada',
-    TRUE,
-    'admin',
-    CURRENT_TIMESTAMP
-),
-
--- Método para órdenes mixtas (productos + servicios)
-(
-    'Híbrido - Producto y Servicio',
-    'Para órdenes que incluyen tanto productos como servicios. Los productos se envían y el servicio se programa.',
-    15.00,
-    'Variable',
     TRUE,
     'admin',
     CURRENT_TIMESTAMP

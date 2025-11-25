@@ -164,5 +164,7 @@ INSERT INTO users_roles (user_id, role_id) VALUES
                                                (7, 4), -- Asigna ROLE_USER
                                                (7, 1), -- Asigna ROLE_ADMIN
                                                   (8, 2), -- Asigna ROLE_SUPER_ADMIN
+                                                  (8, 1), -- Asigna ROLE_SUPER_ADMIN
+                                                  (8, 4), -- Asigna ROLE_SUPER_ADMIN
                                                   (9, 1), -- Asigna ROLE_ADMIN
                                                   (9, 4); -- Asigna ROLE_USER
