@@ -57,7 +57,7 @@ GamaCommerce es una plataforma de e-commerce basada en microservicios que implem
             └────────────────┘      └────────────────┘      └────────────────┘
                     │                        │                        │
             ┌───────▼────────┐      ┌───────▼────────┐      ┌───────▼────────┐
-            │   PostgreSQL   │      │      AWS S3    │      │   PostgreSQL   │
+            │      MySQL     │      │  PostgreSQL    │      │   PostgreSQL   │
             └────────────────┘      └────────────────┘      └────────────────┘
 
             ┌─────────────────────────────────────────────────────────┐
@@ -91,11 +91,12 @@ GamaCommerce es una plataforma de e-commerce basada en microservicios que implem
 | Herramienta | Versión Requerida | Propósito |
 |-------------|-------------------|-----------|
 | **Java JDK** | 17 | Runtime y compilación |
-| **Apache Maven** | 3.9.9+ | Gestión de dependencias |
+| **Apache Maven** | 3.9.9 | Gestión de dependencias |
 | **Docker Desktop** | Última versión | Infraestructura containerizada |
 | **IntelliJ IDEA** | Community/Ultimate | IDE recomendado |
 | **Git** | 2.x+ | Control de versiones |
 | **Postman** | Última versión | Pruebas de API |
+| **Dbeaver** | Última versión | Gestion para bases de datos |
 
 ### Verificación de Instalación
 
@@ -166,7 +167,8 @@ microservice-root-gamacommerce/
 ├── 📁 products-service-gamacommerce/
 ├── 📁 orders-service-gamacommerce/
 ├── 📁 payment-service-gamacommerce/
-└── 📁 credit-card-processor-service-simulator-gamacommerce/
+├── 📁 credit-card-processor-service-simulator-gamacommerce/
+└── 📄 GamaCommerce.postman_collection.json
 ```
 
 ---
@@ -224,11 +226,11 @@ docker-compose up -d
 Abre **Docker Desktop** y confirma que los siguientes contenedores estén en estado **Running**:
 
 - ✅ PostgreSQL
-- ✅ MongoDB
+- ✅ MySql
 - ✅ Kafka + Zookeeper
-- ✅ Prometheus
-- ✅ Grafana
-- ✅ Jaeger
+- ✅ logstash
+- ✅ elasticsearch
+- ✅ kibana
 
 ![Docker Desktop Containers](docs/images/docker-desktop-running.png)
 
@@ -284,7 +286,7 @@ Deberías ver todos los microservicios registrados con estado **UP**.
 
 1. Abre **Postman**
 2. Haz clic en **Import**
-3. Selecciona el archivo de colección del proyecto (proporcionado por separado)
+3. Selecciona el archivo de colección del proyecto 📄GamaCommerce.postman_collection.json
 4. La colección cargará todos los endpoints preconfigurados
 
 ---
@@ -300,8 +302,8 @@ POST http://localhost:8080/v1/user-service/auth/token
 Content-Type: application/json
 
 {
-  "username": "admin@gamacommerce.com",
-  "password": "admin123"
+  "username": "SUPERADMIN",
+  "password": "123456"
 }
 ```
 
@@ -309,9 +311,7 @@ Content-Type: application/json
 
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "type": "Bearer",
-  "expiresIn": 3600
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
@@ -370,15 +370,15 @@ PUT http://localhost:8080/v1/user-service/users/{id}
 
 ## 📊 Monitoreo y Observabilidad
 
-### Prometheus
+### elasticsearch
 
 Métricas de rendimiento y salud de los servicios:
 
 ```
-http://localhost:9090
+http://localhost:9200
 ```
 
-### Grafana
+### kibana
 
 Dashboards visuales de monitoreo:
 
@@ -541,6 +541,6 @@ Si tienes preguntas o problemas:
 
 **⭐ Si este proyecto te fue útil, considera darle una estrella ⭐**
 
-Made with ❤️ by RPantaX
+Made with ❤️ by Jefferson Panta
 
 </div>
