@@ -1,0 +1,977 @@
+{
+	"info": {
+		"_postman_id": "03fc6f04-aa36-4202-a550-31d4dff549ce",
+		"name": "GamaCommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32058512"
+	},
+	"item": [
+		{
+			"name": "products-service",
+			"item": [
+				{
+					"name": "Promotions",
+					"item": [
+						{
+							"name": "listPromotionById",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/v1/product-service/promotion/3"
+							},
+							"response": []
+						},
+						{
+							"name": "listPromotionPageable",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:62466/v1/product-service/promotion/list/pageable"
+							},
+							"response": []
+						},
+						{
+							"name": "listPromotionByCompanyIdPageable",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/v1/product-service/promotion/list/pageable/company/1"
+							},
+							"response": []
+						},
+						{
+							"name": "createPromotion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"promotionName\":\"nuew\",\r\n    \"promotionDescription\": \"Enjoy 20% off selected items\",\r\n    \"promotionDiscountRate\": 0.10, \r\n    \"promotionStartDate\": \"2024-06-15\",\r\n    \"promotionEndDate\": \"2024-07-31\",\r\n    \"companyId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:56058/v1/product-service/promotion"
+							},
+							"response": []
+						},
+						{
+							"name": "delete promotion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:8080/v1/product-service/promotion/1"
+							},
+							"response": []
+						},
+						{
+							"name": "update promotion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"promotionName\":\"Navidad\",\r\n    \"promotionDescription\": \"Enjoy 30% off selected items\",\r\n    \"promotionDiscountRate\": 0.30, \r\n    \"promotionStartDate\": \"2024-12-01\",\r\n    \"promotionEndDate\": \"2024-12-31\",\r\n    \"companyId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/v1/product-service/promotion/2"
+							},
+							"response": []
+						},
+						{
+							"name": "promotionList",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/v1/product-service/promotion/list"
+							},
+							"response": []
+						},
+						{
+							"name": "promotionListByCompanyId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/v1/product-service/promotion/list/company/1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "categoryListPageable",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:61499/v1/product-service/category/list/pageable"
+							},
+							"response": []
+						},
+						{
+							"name": "categoryById",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:61224/v1/product-service/category/1"
+							},
+							"response": []
+						},
+						{
+							"name": "saveCategory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\":\"Gel\",\r\n    \"promotionListId\":[1,2]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:61499/v1/product-service/category"
+							},
+							"response": []
+						},
+						{
+							"name": "createSubcategory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productSubCategoryName\": \"canecalon-mujeres\",\r\n    \"productCategoryParentId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:57940/v1/product-service/category/subcategory"
+							},
+							"response": []
+						},
+						{
+							"name": "updatecategory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productCategoryName\":\"canecalon\",\r\n    \"promotionListId\":[1]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:canecalon/v1/product-service/category/1"
+							},
+							"response": []
+						},
+						{
+							"name": "updateSubcategory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productSubCategoryName\": \"cuarto-actualizado\",\r\n    \"productCategoryParentId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/v1/product-service/category/subcategory/3"
+							},
+							"response": []
+						},
+						{
+							"name": "deleteSubcategory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:8080/v1/product-service/category/1"
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteCategory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:8080/v1/product-service/category/1"
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:57940/v1/product-service/category/list"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "listPageableProducts",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:60308/v1/product-service/product/list"
+							},
+							"response": []
+						},
+						{
+							"name": "listPageableProductsByCompanyId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:60308/v1/product-service/product/list/company/1"
+							},
+							"response": []
+						},
+						{
+							"name": "productByID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:60308/v1/product-service/product/3"
+							},
+							"response": []
+						},
+						{
+							"name": "createProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productName\": \"Gel-EGO\",\r\n  \"productDescription\": \"Comfortable and trendy t-shirt for everyday wear.\",\r\n  \"productImage\": \"https://example.com/images/stylish-tshirt.jpg\",\r\n  \"productCategoryId\": 3,\r\n  \"companyId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:55679/v1/product-service/product"
+							},
+							"response": []
+						},
+						{
+							"name": "updateProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productName\": \"Canecalon-Africano\",\r\n  \"productDescription\": \"Comfortable and trendy t-shirt for everyday wear.\",\r\n  \"productImage\": \"https://example.com/images/stylish-tshirt.jpg\",\r\n  \"productCategoryId\": 5,\r\n  \"companyId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:63293/v1/product-service/product/1"
+							},
+							"response": []
+						},
+						{
+							"name": "delete product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:50693/v1/product-service/product/2"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "item-products",
+					"item": [
+						{
+							"name": "ListItemProductById",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/v1/product-service/itemProduct/12"
+							},
+							"response": []
+						},
+						{
+							"name": "Save ItemProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productId\": 6,\r\n  \"productItemSKU\": \"GEL-EGO-extra-fuerte-001\",\r\n  \"productItemQuantityInStock\": \"50\",\r\n  \"productItemImage\": \"https://example.com/images/tshirt-red-s.jpg\",\r\n  \"productItemPrice\": \"19.99\",\r\n  \"companyId\": 1,\r\n  \"requestVariations\": [\r\n    {\r\n      \"variationName\": \"Sabor\",\r\n      \"variationOptionValue\": \"extra-fuerte\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:57163/v1/product-service/itemProduct"
+							},
+							"response": []
+						},
+						{
+							"name": "update ItemProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productId\": 5,\r\n  \"productItemSKU\": \"GEL-MOCO-GORILLA-fuerte-ACTUALIZADO\",\r\n  \"productItemQuantityInStock\": \"50\",\r\n  \"productItemImage\": \"https://example.com/images/tshirt-red-s.jpg\",\r\n  \"productItemPrice\": \"19.99\",\r\n  \"companyId\": 1,\r\n  \"requestVariations\": [\r\n        {\r\n            \"variationName\": \"Tipo de Cabello\",\r\n            \"variationOptionValue\": \"Cabello Mixto\"\r\n        }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/v1/product-service/itemProduct/5"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete itemProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:65224/v1/product-service/itemProduct/4"
+							},
+							"response": []
+						},
+						{
+							"name": "listbyIds",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"itemProductIds\": [9, 10, 11, 12]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/product-service/itemProduct/list?ids=9&ids=10&ids=11&ids=12",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"product-service",
+										"itemProduct",
+										"list"
+									],
+									"query": [
+										{
+											"key": "ids",
+											"value": "9"
+										},
+										{
+											"key": "ids",
+											"value": "10"
+										},
+										{
+											"key": "ids",
+											"value": "11"
+										},
+										{
+											"key": "ids",
+											"value": "12"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "VARIATION",
+					"item": [
+						{
+							"name": "list all",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:62466/v1/product-service/variation/list"
+							},
+							"response": []
+						},
+						{
+							"name": "list all by CompanyId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:62466/v1/product-service/variation/list/company/1"
+							},
+							"response": []
+						},
+						{
+							"name": "save",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"variationName\":\"Prueba-variation\",\r\n    \"companyId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:62466/v1/product-service/variation"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "orders-service",
+			"item": [
+				{
+					"name": "createOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TOKEN}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productRequestList\": [\r\n    {\r\n      \"productId\": 9,\r\n      \"productQuantity\": 3\r\n    },\r\n    {\r\n      \"productId\": 10,\r\n      \"productQuantity\": 5\r\n    },\r\n    {\r\n      \"productId\": 11,\r\n      \"productQuantity\": 6\r\n    }\r\n  ],    \r\n  \"userId\": 1,\r\n  \"requestAdress\": {\r\n    \"adressStreet\": \"123 Main St\",\r\n    \"adressCity\": \"Example City\",\r\n    \"adressState\": \"Example State\",\r\n    \"adressPostalCode\": \"12345\",\r\n    \"adressCountry\": \"Example Country\"\r\n  },\r\n  \"shoppingMethodId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/v1/orders-service/order"
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderHistoryById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TOKEN}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/v1/orders-service/order/history/8"
+					},
+					"response": []
+				},
+				{
+					"name": "orderservicebyId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TOKEN}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/v1/orders-service/order/7"
+					},
+					"response": []
+				},
+				{
+					"name": "actuator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/v1/orders-service/actuator/info"
+					},
+					"response": []
+				},
+				{
+					"name": "find all orders by CompanyId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TOKEN}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/v1/orders-service/order/list/company/1"
+					},
+					"response": []
+				},
+				{
+					"name": "find all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{TOKEN}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/v1/orders-service/order/list"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment-service",
+			"item": [
+				{
+					"name": "list payment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:57133/v1/payment-service/payment/7"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Company",
+					"item": [
+						{
+							"name": "Create Company",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"person\": {\r\n    \"personDocumentNumber\": \"11145622\",\r\n    \"personName\": \"John\",\r\n    \"personLastName\": \"Doe\",\r\n    \"personPhoneNumber\": \"+51987654355\",\r\n    \"personEmailAddress\": \"jo5.doe@example.com\",\r\n    \"personAddressStreet\": \"123 Main Street\",\r\n    \"personAddressCity\": \"Lima\",\r\n    \"personAddressState\": \"Lima\",\r\n    \"personAddressPostalCode\": \"15001\",\r\n    \"personAddressCountry\": \"Peru\",\r\n    \"personDocumentId\": 2\r\n  },\r\n  \"company\": {\r\n    \"contractRequest\": {\r\n      \"contractTimeMonth\": 12,\r\n      \"contractKindId\": 1\r\n    },\r\n    \"companyTypeId\": 3,\r\n    \"companyDocumentId\": 4,\r\n    \"companyImage\": \"https://example.com/image.png\",\r\n    \"image\": \"https://example.com/logo.png\",\r\n    \"companyTradeName\": \"Logetions\",\r\n    \"companyRUC\": \"20100246768\",\r\n    \"companyPhone\": \"+51912345678\",\r\n    \"companyEmail\": \"contact@techsolutions.com\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/v1/user-service/company/create"
+							},
+							"response": []
+						},
+						{
+							"name": "findById",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/user-service/company/findByRUC?RUC=20100246768",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"user-service",
+										"company",
+										"findByRUC"
+									],
+									"query": [
+										{
+											"key": "RUC",
+											"value": "20100246768"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/v1/user-service/company/list/pageable"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "security",
+					"item": [
+						{
+							"name": "auth sign",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let json = pm.response.json();\r",
+											"pm.environment.set(\"TOKEN\", json.token);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"SUPERADMIN\",\r\n    \"password\":\"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/v1/user-service/auth/token"
+							},
+							"response": []
+						},
+						{
+							"name": "list all users",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/v1/user-service/user"
+							},
+							"response": []
+						},
+						{
+							"name": "create user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{TOKEN}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"pepe\",\r\n    \"password\":\"123456\",\r\n    \"enabled\": true,\r\n    \"admin\":false,\r\n    \"email\":\"pantita@gmail.com\",\r\n    \"document\": \"73005607\",\r\n    \"documentId\": 2,\r\n    \"companyId\": 1\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/v1/user-service/user"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "management",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
