@@ -66,7 +66,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: db_users
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_spanish_ci
     ports:
       - "3308:3306"
     volumes:
@@ -79,11 +78,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: always
   # ===========================================
   # KAFKA CLUSTER
   # ===========================================
   kafka-1-gama:
-    image: 'bitnamilegacy/kafka:4.0'
+    image: 'bitnami/kafka:3.3.2'
     container_name: kafka-1-gama
     environment:
       - KAFKA_CFG_NODE_ID=1
@@ -108,7 +108,7 @@ services:
       retries: 5
 
   kafka-2-gama:
-    image: 'bitnamilegacy/kafka:4.0'
+    image: 'bitnami/kafka:3.3.2'
     container_name: kafka-2-gama
     environment:
       - KAFKA_CFG_NODE_ID=2
@@ -133,7 +133,7 @@ services:
       retries: 5
 
   kafka-3-gama:
-    image: 'bitnamilegacy/kafka:4.0'
+    image: 'bitnami/kafka:3.3.2'
     container_name: kafka-3-gama
     environment:
       - KAFKA_CFG_NODE_ID=3
@@ -224,196 +224,117 @@ services:
   # ===========================================
   # CORE MICROSERVICES
   # ===========================================
-#  config-service:
-#    build:
-#      context: ./execut-config-server-gamacommerce
-#      dockerfile: Dockerfile
-#    container_name: config-service
-#    ports:
-#      - "8888:8888"
-#    networks:
-#      - gamacommerce-network
-#    environment:
-#      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-service:8761/eureka/
-#    healthcheck:
-#      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 5
-#    restart: unless-stopped
-#
-#  discovery-service:
-#    build:
-#      context: ./discovery-service-gamacommerce
-#      dockerfile: Dockerfile
-#    container_name: discovery-service
-#    ports:
-#      - "8761:8761"
-#    networks:
-#      - gamacommerce-network
+  config-service-gama:
+    image: rpantax/config-service:latest
+    container_name: config-service-gama
+    ports:
+      - "8888:8888"
+    networks:
+      - gamacommerce-network
+    restart: unless-stopped
+
+  discovery-service-gama:
+    image: rpantax/discovery-service:latest
+    container_name: discovery-service-gama
+    ports:
+      - "8761:8761"
+    networks:
+      - gamacommerce-network
 
   # ===========================================
   # BUSINESS MICROSERVICES
   # ===========================================
-#  user-service:
-#    build:
-#      context: ./user-service-gamacommerce
-#      dockerfile: Dockerfile
-#    container_name: user-service
-#    depends_on:
-#      mysql-users:
-#        condition: service_healthy
-#      discovery-service: # ✅ AGREGAR DEPENDENCIA
-#        condition: service_started
-#    networks:
-#      - gamacommerce-network
-#    environment:
-#      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-service:8761/eureka/
-#      - SPRING_PROFILES_ACTIVE=docker
-#      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-users:3306/db_users?useSSL=false
-#      - SPRING_DATASOURCE_USERNAME=root
-#      - SPRING_DATASOURCE_PASSWORD=123456
-#    ports:
-#      - "8082:8082"
-#    restart: unless-stopped
-#
-#  product-service:
-#    build:
-#      context: ./products-service-gamacommerce
-#      dockerfile: Dockerfile
-#    container_name: product-service
-#    depends_on:
-#      postgres-orders:
-#        condition: service_healthy
-#      postgres-products:
-#        condition: service_healthy
-#      postgres-payments:
-#        condition: service_healthy
-#      config-service:
-#        condition: service_healthy
-#      kafka-1:
-#        condition: service_healthy
-#      kafka-2:
-#        condition: service_healthy
-#      kafka-3:
-#        condition: service_healthy
-#      discovery-service:
-#        condition: service_started
-#    networks:
-#      - gamacommerce-network
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-products:5432/db_products?useSSL=false
-#      - SPRING_DATASOURCE_USERNAME=fazt
-#      - SPRING_DATASOURCE_PASSWORD=123456
-#      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka-1:9090,kafka-2:9090,kafka-3:9090
-#      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-service:8761/eureka/
-#      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
-#    ports:
-#      - "8081:8081"
-#    restart: unless-stopped
-#  credit-card-processor-service:
-#    build:
-#      context: ./credit-card-processor-service-simulator-gamacommerce
-#      dockerfile: Dockerfile
-#    container_name: credit-card-processor-service
-#    depends_on:
-#      discovery-service:
-#        condition: service_started
-#    networks:
-#      - gamacommerce-network
-#    environment:
-#      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-service:8761/eureka/
-#      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
-#    ports:
-#      - "8084:8084"
-#    restart: unless-stopped
-#  orders-service:
-#    build:
-#      context: ./orders-service-gamacommerce
-#      dockerfile: Dockerfile
-#    container_name: orders-service
-#    depends_on:
-#      postgres-orders:
-#        condition: service_healthy
-#      config-service:
-#        condition: service_healthy
-#      kafka-1:
-#        condition: service_healthy
-#      kafka-2:
-#        condition: service_healthy
-#      kafka-3:
-#        condition: service_healthy
-#      discovery-service:
-#        condition: service_started
-#    networks:
-#      - gamacommerce-network
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5434/db_orders?useSSL=false
-#      - SPRING_DATASOURCE_USERNAME=fazt3
-#      - SPRING_DATASOURCE_PASSWORD=123456
-#      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka-1:9090,kafka-2:9090,kafka-3:9090
-#      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-service:8761/eureka/
-#      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
-#    ports:
-#      - "8085:8085"
-#    restart: unless-stopped
-#  payment-service:
-#    build:
-#      context: ./payment-service-gamacommerce
-#      dockerfile: Dockerfile
-#    container_name: payment-service
-#    depends_on:
-#      postgres-payments:
-#        condition: service_healthy
-#      config-service:
-#        condition: service_healthy
-#      kafka-1:
-#        condition: service_healthy
-#      kafka-2:
-#        condition: service_healthy
-#      kafka-3:
-#        condition: service_healthy
-#      discovery-service:
-#        condition: service_started
-#    networks:
-#      - gamacommerce-network
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5433/db_payments?useSSL=false
-#      - SPRING_DATASOURCE_USERNAME=fazt2
-#      - SPRING_DATASOURCE_PASSWORD=123456
-#      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka-1:9090,kafka-2:9090,kafka-3:9090
-#      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-service:8761/eureka/
-#      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
-#    ports:
-#      - "8086:8086"
-#    restart: unless-stopped
-#  api-gateway:
-#    build:
-#      context: ./api-gateway-service-gamacommerce
-#      dockerfile: Dockerfile
-#    container_name: api-gateway
-#    depends_on:
-#      user-service:
-#        condition: service_started
-#      product-service:
-#        condition: service_started
-#      credit-card-processor-service:
-#        condition: service_started
-#      orders-service:
-#        condition: service_started
-#      payment-service:
-#        condition: service_started
-#      discovery-service:
-#        condition: service_started
-#      config-service:
-#        condition: service_healthy
-#    networks:
-#      - gamacommerce-network
-#    environment:
-#      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-service:8761/eureka/
-#    ports:
-#      - "8080:8080"
-#    restart: unless-stopped
+  user-service-gama:
+    image: rpantax/user-service-gama:latest
+    container_name: user-service-gama
+    depends_on:
+      mysql-users-gama:
+        condition: service_healthy
+      discovery-service-gama: # ✅ AGREGAR DEPENDENCIA
+        condition: service_started
+    networks:
+      - gamacommerce-network
+    ports:
+      - "8082:8082"
+    restart: unless-stopped
+
+  product-service-gama:
+    image: rpantax/products-service-gama:latest
+    container_name: product-service-gama
+    depends_on:
+      postgres-products-gama:
+        condition: service_healthy
+      config-service-gama:
+        condition: service_healthy
+      discovery-service-gama:
+        condition: service_started
+    networks:
+      - gamacommerce-network
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+  credit-card-processor-service-gama:
+    image: rpantax/credit-card-processor-service-gama:latest
+    container_name: credit-card-processor-service-gama
+    depends_on:
+      discovery-service-gama:
+        condition: service_started
+    networks:
+      - gamacommerce-network
+    ports:
+      - "8084:8084"
+    restart: unless-stopped
+  orders-service-gama:
+    image: rpantax/orders-service-gama:latest
+    container_name: orders-service-gama
+    depends_on:
+      postgres-orders-gama:
+        condition: service_healthy
+      config-service-gama:
+        condition: service_healthy
+      kafka-1-gama:
+        condition: service_healthy
+      kafka-2-gama:
+        condition: service_healthy
+      kafka-3-gama:
+        condition: service_healthy
+      discovery-service-gama:
+        condition: service_started
+    networks:
+      - gamacommerce-network
+    ports:
+      - "8085:8085"
+    restart: unless-stopped
+  payment-service-gama:
+    image: rpantax/payment-service-gama:latest
+    container_name: payment-service-gama
+    depends_on:
+      postgres-payments-gama:
+        condition: service_healthy
+      config-service-gama:
+        condition: service_healthy
+      kafka-1-gama:
+        condition: service_healthy
+      kafka-2-gama:
+        condition: service_healthy
+      kafka-3-gama:
+        condition: service_healthy
+      discovery-service-gama:
+        condition: service_started
+    networks:
+      - gamacommerce-network
+    ports:
+      - "8086:8086"
+    restart: unless-stopped
+
+  api-gateway-gama:
+    image: rpantax/api-gateway-service:latest
+    container_name: api-gateway-gama
+    networks:
+      - gamacommerce-network
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
 
 networks:
   gamacommerce-network:
